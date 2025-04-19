@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator GCS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4 text-center text-blue-600">Kalkulator GCS</h1>
+
+    <!-- Eye Response -->
+    <label class="block mb-2 font-semibold">Respons Mata (E)</label>
+    <select id="eye" class="w-full p-2 mb-4 border rounded">
+      <option value="4">4 - Spontan</option>
+      <option value="3">3 - Terhadap suara</option>
+      <option value="2">2 - Terhadap nyeri</option>
+      <option value="1">1 - Tidak ada</option>
+    </select>
+
+    <!-- Verbal Response -->
+    <label class="block mb-2 font-semibold">Respons Verbal (V)</label>
+    <select id="verbal" class="w-full p-2 mb-4 border rounded">
+      <option value="5">5 - Orientasi baik</option>
+      <option value="4">4 - Bingung</option>
+      <option value="3">3 - Kata tidak tepat</option>
+      <option value="2">2 - Suara tidak dimengerti</option>
+      <option value="1">1 - Tidak ada</option>
+    </select>
+
+    <!-- Motor Response -->
+    <label class="block mb-2 font-semibold">Respons Motorik (M)</label>
+    <select id="motor" class="w-full p-2 mb-4 border rounded">
+      <option value="6">6 - Ikuti perintah</option>
+      <option value="5">5 - Lokalisasi nyeri</option>
+      <option value="4">4 - Tarik dari nyeri</option>
+      <option value="3">3 - Fleksi abnormal</option>
+      <option value="2">2 - Ekstensi abnormal</option>
+      <option value="1">1 - Tidak ada</option>
+    </select>
+
+    <button onclick="hitungGCS()" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition">
+      Hitung GCS
+    </button>
+
+    <div id="hasil" class="mt-4 text-center text-lg font-semibold text-gray-700"></div>
+  </div>
+
+  <script>
+    function hitungGCS() {
+      const eye = parseInt(document.getElementById('eye').value);
+      const verbal = parseInt(document.getElementById('verbal').value);
+      const motor = parseInt(document.getElementById('motor').value);
+
+      const total = eye + verbal + motor;
+      let status = "";
+
+      if (total >= 13) status = "Cedera Ringan";
+      else if (total >= 9) status = "Cedera Sedang";
+      else status = "Cedera Berat";
+
+      document.getElementById('hasil').innerHTML = `Skor GCS: ${total} (${status})`;
+    }
+  </script>
+</body>
+</html>
